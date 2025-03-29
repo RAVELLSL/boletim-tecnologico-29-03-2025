@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notícias Preto e Branco</title>
+  <!-- Fontes que remetem ao estilo clássico de máquina de datilografia -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Courier+Prime:400,700&display=swap" rel="stylesheet">
+  <style>
+    /* Smooth scrolling para âncoras */
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Fundo da página: degradê sutil em preto e cinza */
+    body {
+      margin: 0;
+      padding: 0;
+      background: 
+        radial-gradient(at top left, rgba(255,255,255,0.05), transparent 50%),
+        radial-gradient(at bottom right, rgba(255,255,255,0.05), transparent 50%),
+        linear-gradient(135deg, #000, #444);
+      background-blend-mode: screen;
+      background-size: 150% 150%;
+      font-family: 'Roboto Mono', monospace;
+      color: #fff;
+    }
+    /* Container centralizado com sombra aprimorada */
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px 30px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      color: #000;
+    }
+    header {
+      text-align: center;
+      padding: 20px 0;
+      border-bottom: 2px solid #888;
+      margin-bottom: 20px;
+    }
+    header h1 {
+      margin: 0;
+      font-family: 'Courier Prime', monospace;
+      font-size: 3em;
+      letter-spacing: 1px;
+      color: #000;
+    }
+    header .edition {
+      margin-top: 5px;
+      font-size: 1.2em;
+      color: #555;
+      font-style: italic;
+    }
+    /* Menu de navegação aprimorado */
+    .menu {
+      background: rgba(68, 68, 68, 0.9);
+      padding: 10px 0;
+      margin-bottom: 30px;
+      border-radius: 5px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .menu ul li {
+      margin: 5px 15px;
+    }
+    .menu ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      font-family: 'Roboto Mono', monospace;
+      transition: color 0.3s;
+    }
+    .menu ul li a:hover {
+      color: #ff9800;
+    }
+    /* Seção de notícias */
+    .news-section {
+      margin-top: 40px;
+    }
+    .news-section h2 {
+      font-family: 'Courier Prime', monospace;
+      font-size: 2.2em;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #888;
+      padding-bottom: 10px;
+      text-align: center;
+      color: #333;
+    }
+    /* Artigo com efeito hover e transição suave */
+    article.news-article {
+      padding: 20px;
+      margin-bottom: 40px;
+      background: #f7f7f7;
+      border: 1px solid #aaa;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      color: #000;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    article.news-article:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    article.news-article:last-of-type {
+      margin-bottom: 0;
+    }
+    article.news-article h3 {
+      font-family: 'Courier Prime', monospace;
+      font-size: 1.8em;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #888;
+      padding-bottom: 5px;
+      text-align: center;
+      color: #000;
+    }
+    /* Estilo para subtópicos (por exemplo, utilizando a tag <h4>) */
+    article.news-article h4 {
+      font-family: 'Courier Prime', monospace;
+      font-size: 1.6em;
+      margin: 25px 0 15px;
+      color: #555;
+      border-bottom: 1px dashed #aaa;
+      padding-bottom: 5px;
+    }
+    /* Ajuste do espaçamento entre parágrafos */
+    article.news-article p {
+      margin: 20px 0;
+      text-align: justify;
+      line-height: 1.8;
+      font-size: 1em;
+      color: #333;
+    }
+    /* Estilo para listas com espaçamento aprimorado */
+    ul {
+      margin: 20px 0 20px 20px;
+      padding: 0;
+    }
+    li {
+      margin: 12px 0;
+    }
+    .article-image {
+      margin-bottom: 15px;
+      overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .article-image img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s;
+    }
+    .article-image img:hover {
+      transform: scale(1.05);
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px 20px;
+      }
+      header h1 {
+        font-size: 2.2em;
+      }
+      .news-section h2 {
+        font-size: 1.8em;
+      }
+      article.news-article h3 {
+        font-size: 1.4em;
+      }
+      .menu ul li {
+        margin: 5px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Notícias Preto e Branco</h1>
+      <p class="edition">Edição de 29/03/2025</p>
+    </header>
+    
+    <!-- Menu de Navegação -->
+    <nav class="menu">
+      <ul>
+        <li><a href="#inteligencia-artificial">INTELIGÊNCIA ARTIFICIAL</a></li>
+        <li><a href="#inovacao-tecnologica">INOVAÇÃO TECNOLÓGICA</a></li>
+        <li><a href="#saude-tecnologia">SAÚDE E TECNOLOGIA</a></li>
+        <li><a href="#deu-ruim">DEU RUIM!?</a></li>
+        <li><a href="#noticias-variadas">NOTÍCIAS VARIADAS</a></li>
+      </ul>
+    </nav>
+    
+    <!-- Seção: Inteligência Artificial -->
+    <section id="inteligencia-artificial" class="news-section">
+      <h2>INTELIGÊNCIA ARTIFICIAL</h2>
+      <!-- Artigo de exemplo para Inteligência Artificial -->
+      <article class="news-article">
+        <div class="article-image">
+          <img src="https://img.odcdn.com.br/wp-content/uploads/2024/06/Destaque-Google-Gemini-1024x576.jpg" alt="Imagem representativa">
+        </div>
+        <h3>Google apresenta Gemini 2.5 com avanços em raciocínio e desempenho</h3>
+        <p>O Google lançou oficialmente o Gemini 2.5 Pro Experimental, a versão mais avançada de sua linha de modelos de inteligência artificial. O novo sistema promete elevar o padrão da IA ao incorporar uma abordagem inédita que permite "pensar" antes de agir.</p>
+        <p>Essa evolução é fruto de técnicas como o aprendizado por reforço e o conceito de Flash Thinking, introduzido na versão anterior, Gemini 2.0. O objetivo é tornar a IA capaz de analisar dados complexos, fazer deduções lógicas e tomar decisões mais informadas — o que se reflete em maior precisão e desempenho.</p>
+      
+        <p><strong>Entre os destaques do modelo estão:</strong></p>
+        <ul>
+          <li><strong>Raciocínio avançado:</strong> excelência em tarefas matemáticas e científicas.</li>
+          <li><strong>Capacidades de codificação:</strong> criação de aplicativos web e transformação de código com eficiência.</li>
+          <li><strong>Processamento multimodal:</strong> suporte ampliado para interpretar simultaneamente texto, áudio, imagem e vídeo, graças à sua janela de contexto expandida.</li>
+        </ul>
+      
+        <p>O Gemini 2.5 já lidera o ranking LMArena, que mede a preferência humana em interações com modelos de linguagem. A versão experimental está disponível no Google AI Studio e no aplicativo Gemini Advanced, com previsão de chegada ao Vertex AI.</p>
+        <p>Desenvolvedores e usuários são convidados a explorar os recursos e contribuir com feedback para aprimoramentos futuros.</p>
+      </article>
+      
+      <article class="news-article">
+        <div class="article-image">
+          <img src="https://img.odcdn.com.br/wp-content/uploads/2025/03/openAI-1024x682.jpg" alt="Imagem representativa">
+        </div>
+        <h3>OpenAI integra Sora ao ChatGPT com avanços na criação de imagens</h3>
+        <p>A OpenAI anunciou a integração do gerador de imagens Sora ao ChatGPT, unificando suas ferramentas em uma única plataforma. A funcionalidade, chamada “Imagens no ChatGPT”, está disponível para todos os usuários — incluindo os planos Free, Plus, Pro e Team — com limitações específicas para contas gratuitas.</p>
+        <p>Inicialmente apresentado como gerador de vídeos por IA, o Sora nesta fase se concentra exclusivamente em imagens. A nova abordagem técnica, baseada em um processo autoregressivo (que constrói a imagem sequencialmente), oferece ganhos em precisão, especialmente em composições com múltiplos elementos visuais e textuais.</p>
+      
+        <p><strong>Principais avanços da ferramenta:</strong></p>
+        <ul>
+          <li><strong>Precisão nos detalhes:</strong> melhor desempenho no “binding”, ou seja, na correlação entre atributos e objetos em uma imagem.</li>
+          <li><strong>Renderização de texto aprimorada:</strong> maior clareza em palavras inseridas nas imagens, com falhas ocorrendo apenas em fontes muito pequenas.</li>
+          <li><strong>Versatilidade de uso:</strong> ideal para diagramas científicos, quadrinhos, pôsteres informativos e imagens com fundo transparente.</li>
+        </ul>
+      
+        <p>Apesar de gerar imagens de forma mais lenta, a OpenAI defende que a qualidade superior compensa o tempo adicional.</p>
+      
+        <p><strong>Segurança e rastreabilidade</strong><br>
+        A empresa reforçou as proteções contra o uso indevido das imagens, como deepfakes ou remoção de marcas d’água. Todas as criações incluem metadados C2PA, padrão que permite rastrear sua origem como conteúdo gerado por IA.</p>
+      
+        <p>Com esse avanço, o ChatGPT amplia significativamente seu escopo criativo, oferecendo aos usuários uma ferramenta visual mais precisa, segura e intuitiva.</p>
+      </article>
+      
+      <article class="news-article">
+        <div class="article-image">
+          <img src="https://img.odcdn.com.br/wp-content/uploads/2025/02/deepseek__-1920x1080.jpg" alt="Imagem representativa">
+        </div>
+        <h3>DeepSeek lança atualização com foco em programação e eficiência</h3>
+        <p>A startup chinesa DeepSeek anunciou silenciosamente a versão V3-0324 de seu modelo de inteligência artificial, agora disponível na plataforma Hugging Face. A atualização promete avanços significativos na capacidade de programação da IA, com foco em desafios do mundo real.</p>
+        <p>Embora não tenha havido comunicado oficial, a empresa afirma que o novo modelo estabelece novos padrões de precisão e eficiência, reforçando a posição da DeepSeek como uma das concorrentes mais relevantes no setor.</p>
+      
+        <p><strong>Destaques da nova versão:</strong></p>
+        <ul>
+          <li>Melhor desempenho em tarefas de programação, com foco em cenários práticos;</li>
+          <li>Aprimoramentos de eficiência, tornando o modelo mais competitivo mesmo com menor uso de recursos.</li>
+        </ul>
+      
+        <p>O modelo ganhou destaque global no início de 2025, quando ultrapassou o ChatGPT como o aplicativo gratuito mais baixado da App Store nos EUA. A performance da versão R1, que rivalizou com modelos da OpenAI e Google, provocou debates sobre a viabilidade de desenvolver IA de ponta com menos investimento.</p>
+      
+        <p><strong>Reconhecimento internacional</strong><br>
+        O CEO da Apple, Tim Cook, elogiou o DeepSeek como “excelente” durante visita à China, enquanto a empresa ainda busca aprovação para lançar o Apple Intelligence no país. A Apple, por outro lado, enfrenta atrasos no desenvolvimento da Siri, o que reforça a atenção ao avanço de concorrentes como a DeepSeek.</p>
+      
+        <p>A movimentação da startup mostra como novas abordagens e eficiência no uso de recursos podem impulsionar inovações em IA, especialmente em um cenário cada vez mais competitivo.</p>
+      </article>
+      
+      <article class="news-article">
+        <div class="article-image">
+          <img src="https://img.odcdn.com.br/wp-content/uploads/2024/10/satya-nadella-1920x1080.jpg" alt="Imagem representativa">
+        </div>
+        <h3>Microsoft adota DeepSeek R1 como novo padrão para o futuro da IA</h3>
+        <p>A Microsoft oficializou o modelo DeepSeek R1 como referência para suas futuras iniciativas em inteligência artificial. A decisão, revelada durante um encontro interno com lideranças da empresa, representa uma mudança estratégica liderada por Satya Nadella, que destacou a eficiência e inovação do modelo como exemplo a ser seguido.</p>
+      
+        <p><strong>O que motivou a decisão:</strong></p>
+        <ul>
+          <li><strong>Eficiência computacional e equipe enxuta:</strong> o DeepSeek R1 tem se destacado por entregar alto desempenho com menos recursos.</li>
+          <li><strong>Transformação rápida de pesquisa em produto:</strong> o sucesso do modelo, que alcançou o topo da App Store, exemplifica sua capacidade de inovação ágil.</li>
+          <li><strong>Contraste com o Copilot:</strong> enquanto o DeepSeek cresce em popularidade, o Copilot ainda busca consolidar sua base de usuários, apesar dos investimentos pesados da Microsoft.</li>
+        </ul>
+      
+        <p>A empresa também aposta no desenvolvimento de novos modelos como o Muse, treinado com dados de jogos do Xbox, com o objetivo de criar experiências de IA mais interativas e voltadas para o entretenimento e a criação de conteúdo.</p>
+      
+        <p><strong>Visão de futuro</strong><br>
+        Jay Parikh, responsável pelo grupo de engenharia CoreAI da Microsoft, reforçou a necessidade de velocidade e adaptabilidade no desenvolvimento de IA, inspirando-se no sucesso da startup chinesa. A companhia projeta um futuro em que todas as aplicações utilizem inteligência artificial, o que aumenta a demanda por infraestrutura em nuvem.</p>
+      
+        <p>Além da inovação, a Microsoft mantém o compromisso com a sustentabilidade, buscando atingir neutralidade de carbono até 2030 — um desafio ampliado pelo crescimento do consumo energético das tecnologias de IA.</p>
+      
+        <p>A adoção do DeepSeek como padrão marca uma nova fase na estratégia da Microsoft, unindo agilidade, eficiência e visão de longo prazo no ecossistema da inteligência artificial.</p>
+      </article>
+      
+      <article class="news-article">
+        <div class="article-image">
+          <img src="https://images.axios.com/9oE7F0fbRhSBcMTuCMPDU_1Jxk0=/0x348:8161x4939/1920x1080/2025/01/30/1738279680385.jpg" alt="Imagem representativa">
+        </div>
+        <h3>Destilação: a técnica da DeepSeek que revoluciona a IA e inspira gigantes do setor</h3>
+        <p>A DeepSeek, startup chinesa de inteligência artificial, tem chamado a atenção do mercado ao empregar a técnica de destilação para desenvolver modelos de IA mais eficientes e acessíveis. Esse método permite transferir o conhecimento de modelos maiores e complexos para versões menores, mantendo desempenho comparável com menor custo computacional.</p>
+      
+        <p><strong>O que é a destilação em IA?</strong></p>
+        <p>A destilação é um processo no qual um modelo de IA compacto (aluno) aprende a replicar o comportamento de um modelo maior e mais poderoso (professor). Durante o treinamento, o modelo aluno é ajustado para imitar as respostas do professor, resultando em uma versão mais enxuta capaz de realizar tarefas complexas com eficiência semelhante.</p>
+      
+        <p><strong>Impacto no mercado de IA</strong></p>
+        <p>Empresas como OpenAI, Microsoft e Meta têm adotado a destilação para otimizar seus modelos, buscando reduzir os elevados custos associados ao treinamento e operação de grandes modelos de linguagem.</p>
+        <p>A abordagem da DeepSeek destaca-se por demonstrar que é possível alcançar alto desempenho em IA com investimentos significativamente menores, desafiando o paradigma de que apenas grandes investimentos resultam em modelos eficazes.</p>
+      
+        <p><strong>Controvérsias e desafios</strong></p>
+        <p>Apesar dos benefícios, a destilação levanta questões éticas e legais. A OpenAI, por exemplo, acusou a DeepSeek de utilizar indevidamente seus modelos para treinar suas próprias IAs por meio dessa técnica, alegando violação de propriedade intelectual.</p>
+        <p>Esse cenário evidencia a necessidade de estabelecer diretrizes claras para o uso de métodos como a destilação no desenvolvimento de novas tecnologias.</p>
+      
+        <p>A popularização da destilação sinaliza uma tendência crescente no setor de IA: a busca por soluções mais sustentáveis e acessíveis, sem comprometer a qualidade e a performance dos modelos desenvolvidos.</p>
+      </article>
+      
+      <article class="news-article">
+        <div class="article-image">
+          <img src="https://veja.abril.com.br/wp-content/uploads/2018/03/robo-inteligencia-artificial-20170803-0003.jpg?quality=70&strip=info&w=1125&h=720&crop=1" alt="Imagem representativa">
+        </div>
+        <h3>Manus AI: agente autônomo chinês promete revolucionar a automação de tarefas</h3>
+        <p>A startup chinesa Monica lançou o Manus AI, um agente de inteligência artificial que promete realizar tarefas complexas de forma autônoma, com mínima intervenção humana. Desde o lançamento, no início de março, o sistema já conta com uma fila de espera de 2 milhões de usuários, refletindo o alto interesse global pela ferramenta.</p>
+      
+        <p><strong>Destaques do Manus AI:</strong></p>
+        <ul>
+          <li><strong>Autonomia avançada:</strong> capaz de planejar, executar e entregar tarefas sem comandos detalhados;</li>
+          <li><strong>Execução contínua:</strong> mantém o processamento de tarefas mesmo quando o usuário está offline;</li>
+          <li><strong>Capacidades multimodais:</strong> lida com texto, imagens e código;</li>
+          <li><strong>Integração com ferramentas:</strong> como navegadores, editores de código e sistemas de banco de dados;</li>
+          <li><strong>Aprendizado adaptativo:</strong> melhora com o uso, personalizando respostas e ações.</li>
+        </ul>
+      
+        <p>A empresa já anunciou parceria com os desenvolvedores do modelo Qwen, da Alibaba, o que pode acelerar o lançamento oficial na China, que tem sinalizado apoio ao projeto. A emissora estatal CCTV já destacou o Manus como um marco tecnológico, sugerindo um futuro promissor para o sistema no mercado asiático.</p>
+      
+        <p>Com uma proposta de agente de IA geral — mais independente do que os assistentes como ChatGPT ou DeepSeek — o Manus AI pode estabelecer um novo padrão para ferramentas de produtividade baseadas em inteligência artificial.</p>
+      </article>      
+      <!-- Adicione mais artigos conforme necessário -->
+    </section>
+    
+
+
+    <!-- Seção: Inovação Tecnológica -->
+    <section id="inovacao-tecnologica" class="news-section">
+      <h2>INOVAÇÃO TECNOLÓGICA</h2>
+      <!-- Artigo de exemplo para Inovação Tecnológica -->
+      <article class="news-article">
+        <div class="article-image">
+          <img src="https://tm.ibxk.com.br/2025/03/24/24202845082001.jpg?ims=1280x480" alt="Imagem representativa">
+        </div>
+        <h3>Internet 6G: o que esperar da próxima geração de redes móveis</h3>
+        <p>Embora o 5G ainda esteja em fase de expansão no Brasil, o mundo da tecnologia já projeta os avanços que a internet 6G trará até o fim desta década. Com expectativa de ser até 100 vezes mais rápida que o 5G, a nova geração deve transformar o cenário digital, ampliando o alcance e o desempenho de tecnologias como inteligência artificial e Internet das Coisas (IoT).</p>
+      
+        <p><strong>O que é o 6G?</strong><br>
+        A internet 6G representa a próxima evolução das redes móveis, atualmente em desenvolvimento. Seu foco principal está na capacidade de interligar milhões de dispositivos com altíssima velocidade e latência extremamente baixa — podendo atingir picos de 1.000 gigabits por segundo e latência abaixo de 100 microssegundos.</p>
+      
+        <p><strong>Principais benefícios esperados:</strong></p>
+        <ul>
+          <li>Alta velocidade de conexão, com transmissão de dados ultrarrápida;</li>
+          <li>Expansão da Internet das Coisas, viabilizando comunicação em tempo real entre dispositivos como carros, drones e sensores urbanos;</li>
+          <li>Latência ultrabaixa, que permitirá interações praticamente instantâneas;</li>
+          <li>Maior confiabilidade da rede, ideal para aplicações críticas e automatizadas.</li>
+        </ul>
+      
+        <p><strong>Previsão de chegada</strong><br>
+        A implementação comercial da internet 6G está prevista para ocorrer em torno de 2030. Enquanto países como Coreia do Sul e China avançam nos testes e desenvolvimento de infraestrutura, o Brasil ainda enfrenta o desafio de concluir a implantação do 5G em todo o território nacional.</p>
+      
+        <p>Gigantes da tecnologia como Samsung, Huawei e LG já lideram iniciativas globais na corrida pelo 6G. A expectativa é que essa nova rede promova avanços significativos em áreas como saúde conectada, cidades inteligentes, indústria automatizada e comunicações imersivas.</p>
+      </article>
+      
+      <article class="news-article">
+        <div class="article-image">
+          <img src="https://img.odcdn.com.br/wp-content/uploads/2025/03/tecladoo-1-1920x1080.jpg" alt="Imagem representativa">
+        </div>
+        <h3>Novo teclado com IA permite digitação controlada pela mente, sem implantes</h3>
+        <p>Em uma parceria entre a Inclusive Brains e a Allianz Trade, foi apresentado um teclado inovador controlado por sinais cerebrais, dispensando o uso de implantes. Alimentado por inteligência artificial, o sistema utiliza a plataforma Prometheus BCI e visa promover maior inclusão digital para pessoas com deficiência.</p>
+      
+        <p><strong>Como funciona?</strong><br>
+        O teclado capta e interpreta sinais do corpo — como ondas cerebrais, expressões faciais, movimentos oculares e outros dados fisiológicos — para converter em comandos digitais. A entrada ocorre por sensores não invasivos no couro cabeludo ou pele, aliados a uma webcam e um relógio inteligente. A IA então processa esses dados e permite a seleção de letras na tela.</p>
+      
+        <p><strong>O sistema também oferece:</strong></p>
+        <ul>
+          <li>Preenchimento automático inteligente;</li>
+          <li>Correção de erros de digitação;</li>
+          <li>Treinamento personalizado com base no usuário.</li>
+        </ul>
+      
+        <p><strong>Disponibilidade e futuro</strong><br>
+        Ainda em fase de testes e apresentações públicas, o sistema Prometheus BCI não está disponível comercialmente. No entanto, os desenvolvedores planejam lançar o algoritmo como código aberto, expandindo seu uso para além de pessoas com deficiência.</p>
+      
+        <p>A inovação reforça o potencial da neurotecnologia com IA como ferramenta de acessibilidade e inclusão, pavimentando o caminho para interfaces homem-máquina cada vez mais intuitivas.</p>
+      </article>
+      
+      <article class="news-article">
+        <div class="article-image">
+          <img src="https://img.odcdn.com.br/wp-content/uploads/2025/03/data-centers-1920x1000.jpg" alt="Imagem representativa">
+        </div>
+        <h3>Google atinge marca histórica com baterias de lítio em data centers</h3>
+        <p>Em um marco para a sustentabilidade tecnológica, o Google anunciou ter alcançado a instalação de 100 milhões de células de íons de lítio em seus data centers. O movimento, iniciado há uma década, substituiu gradualmente as antigas baterias de chumbo-ácido, resultando em avanços significativos em eficiência e economia de espaço.</p>
+      
+        <p><strong>Benefícios da mudança:</strong></p>
+        <ul>
+          <li>Dobro de capacidade energética em relação às baterias anteriores;</li>
+          <li>Redução de 75% no número de células necessárias, graças à maior eficiência;</li>
+          <li>Ocupação de metade do espaço físico, fator crucial diante do alto custo de construção dos centros de dados.</li>
+        </ul>
+      
+        <p>Além de melhorar o desempenho, essa transição acompanha uma tendência mais ampla de adoção das baterias de lítio, impulsionada pela popularização de veículos elétricos. O impacto, no entanto, vai além do setor corporativo.</p>
+      
+        <p><strong>Expansão para outros setores</strong></p>
+        <ul>
+          <li>Residências adotam baterias para armazenar energia solar e enfrentar blecautes;</li>
+          <li>Campings substituem geradores barulhentos por opções portáteis mais limpas;</li>
+          <li>Saúde utiliza baterias compactas no transporte de amostras biológicas, com controle térmico em tempo real.</li>
+        </ul>
+      
+        <p>Embora os números da Google sejam modestos se comparados à produção bilionária de fabricantes como a Panasonic, o impacto prático é expressivo. A verdadeira revolução das baterias está na sua capacidade de transformar setores diversos com eficiência, sustentabilidade e inovação.</p>
+      </article>
+      
+      <article class="news-article">
+        <div class="article-image">
+          <img src="https://img.odcdn.com.br/cdn-cgi/image/width=1280,height=720,fit=cover/wp-content/uploads/2025/03/image-4-2.jpg" alt="Imagem representativa">
+        </div>
+        <h3>Robô feito em impressora 3D caminha sem eletrônicos e pode operar por até 3 dias</h3>
+        <p>Pesquisadores da Califórnia desenvolveram um robô de seis pernas totalmente impresso em 3D, capaz de se movimentar sem o uso de qualquer componente eletrônico. O projeto, descrito na revista Advanced Intelligent Systems, custa apenas US$ 20 para ser produzido e representa uma nova abordagem na construção de máquinas autônomas.</p>
+      
+        <p><strong>Como funciona?</strong><br>
+        O movimento do robô é gerado por um circuito pneumático oscilante, que converte a energia de um cartucho de gás comprimido para acionar suas pernas — que se movem para frente, para trás, para cima e para baixo. A invenção é capaz de operar por até três dias quando conectada a uma fonte de gás com pressão constante.</p>
+      
+        <p><strong>Principais características:</strong></p>
+        <ul>
+          <li>Totalmente impresso em 3D, com material pronto para uso;</li>
+          <li>Sem componentes eletrônicos, o que reduz custos e riscos operacionais;</li>
+          <li>Autonomia em diversos terrenos, incluindo grama, areia e ambientes subaquáticos;</li>
+          <li>Aplicações promissoras, como reconhecimento de áreas radioativas, resposta a desastres e exploração espacial.</li>
+        </ul>
+      
+        <p>A equipe responsável já estuda melhorias como a inclusão de pinças, armazenamento interno de gás e uso de materiais recicláveis ou biodegradáveis, ampliando o potencial sustentável e funcional do projeto.</p>
+      
+        <p>A criação representa uma inovação no design de robôs, provando que soluções de baixo custo e alta eficácia podem desempenhar papéis importantes em cenários extremos e de difícil acesso.</p>
+      </article>
+      
+      <article class="news-article">
+        <div class="article-image">
+          <img src="https://img.odcdn.com.br/wp-content/uploads/2025/03/iStock-1400072829-1024x683.jpg" alt="Imagem representativa">
+        </div>
+        <h3>Bateria nuclear com radiocarbono pode durar milênios sem recarga</h3>
+        <p>Pesquisadores do Daegu Gyeongbuk Institute of Science & Technology (DGIST), na Coreia do Sul, apresentaram um protótipo de bateria nuclear inovadora movida a radiocarbono, que promete operar por milênios sem a necessidade de recarga. A proposta oferece uma alternativa estável e segura frente às tradicionais baterias de íons de lítio, que se degradam com o tempo.</p>
+      
+        <p><strong>Como funciona a bateria?</strong><br>
+        Baseada no princípio das betavoltaicas, a bateria converte a radiação beta emitida pelo radiocarbono em eletricidade. O isótopo é estável, possui meia-vida de 5.730 anos e é considerado seguro, já que sua radiação pode ser bloqueada com uma fina camada de alumínio.</p>
+      
+        <p><strong>Inovações no design:</strong></p>
+        <ul>
+          <li>Utiliza dióxido de titânio como semicondutor, comum em células solares;</li>
+          <li>É sensibilizada com corante à base de rutênio, que intensifica a geração de elétrons;</li>
+          <li>O tratamento com ácido cítrico melhora a ligação entre os materiais, aumentando a eficiência energética de 0,48% para 2,86%.</li>
+        </ul>
+      
+        <p><strong>Aplicações e vantagens:</strong></p>
+        <ul>
+          <li>Dispositivos médicos, como marcapassos, que poderiam funcionar por toda a vida do paciente sem substituições;</li>
+          <li>Equipamentos espaciais e sensores remotos, que exigem fonte de energia estável e duradoura;</li>
+          <li>Alta resistência térmica, com funcionamento em ambientes extremos;</li>
+          <li>Sustentabilidade, ao reutilizar subprodutos das usinas nucleares e evitar impactos ambientais causados pela mineração de lítio.</li>
+        </ul>
+      
+        <p>Essa tecnologia pode representar uma revolução no armazenamento de energia, oferecendo uma alternativa segura, durável e ecologicamente viável para atender às crescentes demandas por soluções energéticas de longo prazo.</p>
+      </article>
+      <!-- Adicione mais artigos conforme necessário -->       
+    </section>
+    
+
+
+    <!-- Seção: Saúde e Tecnologia -->
+    <section id="saude-tecnologia" class="news-section">
+      <h2>SAÚDE E TECNOLOGIA</h2>
+      <!-- Artigo de exemplo para Saúde e Tecnologia -->
+      <<article class="news-article">
+  <div class="article-image">
+    <img src="https://tm.ibxk.com.br/2025/03/24/24172611325056.jpg?ims=1280x480" alt="Imagem representativa">
+  </div>
+  <h3>Pacientes paralisados voltam a andar após implante cérebro-espinhal desenvolvido na China</h3>
+  <p>Pesquisadores da Universidade Fudan, em Xangai, realizaram um avanço histórico ao restaurar a mobilidade de pacientes paralisados por meio de uma interface cérebro-espinhal inovadora. A tecnologia utiliza implantes de eletrodos no cérebro e na medula espinhal, reconectando vias neurais rompidas por lesões traumáticas.</p>
+
+  <p><strong>Destaques do procedimento:</strong></p>
+  <ul>
+    <li>A técnica, chamada de interface cérebro-coluna triplamente integrada, recria o elo neural entre cérebro e medula sem a necessidade de dispositivos externos;</li>
+    <li>Em um dos casos, um paciente voltou a mover as pernas apenas 24 horas após a cirurgia;</li>
+    <li>Em duas semanas, o mesmo paciente já conseguia caminhar e sentir contrações musculares espontâneas, além de recuperar funções sensoriais internas.</li>
+  </ul>
+
+  <p><strong>Funcionamento do sistema</strong><br>
+  Dois minúsculos chips com 1 mm de diâmetro foram implantados no córtex motor para captar sinais cerebrais. Esses sinais são processados por IA e convertidos em estímulos elétricos direcionados à medula, restabelecendo o controle voluntário dos membros.</p>
+
+  <p><strong>Comparativo internacional</strong><br>
+  A recuperação observada nos testes chineses foi mais rápida do que em estudos semelhantes realizados na Suíça, onde os efeitos surgiram após seis meses. Além disso, todos os dispositivos utilizados foram desenvolvidos na China, que possui cerca de 3,7 milhões de pessoas com lesões na medula espinhal.</p>
+
+  <p><strong>Próximos passos</strong><br>
+  Os pesquisadores estimam que os pacientes possam caminhar sem suportes entre seis meses a um ano, desde que sigam um programa de reabilitação intensiva. A técnica oferece esperança real para milhões de pessoas com paralisias motoras, marcando um avanço significativo na interface entre neurociência e tecnologia.</p>
+</article>
+
+<article class="news-article">
+  <div class="article-image">
+    <img src="https://s2.glbimg.com/oT-xrjAPLpLiFBwnZaXczsjL12U=/620x350/e.glbimg.com/og/ed/f/original/2019/08/05/gettyimages-497487570.jpg" alt="Imagem representativa">
+  </div>
+  <h3>Estudo indica que "limpar" o cérebro pode prevenir perda de memória</h3>
+  <p>Pesquisadores da Universidade de Washington em St. Louis revelaram um novo caminho para prevenir a perda de memória associada ao envelhecimento: melhorar o sistema natural de limpeza do cérebro. O estudo, publicado na revista Cell, mostrou que fortalecer os vasos que removem resíduos do cérebro em camundongos idosos levou a uma melhora significativa na memória dos animais.</p>
+
+  <p><strong>Como funciona o processo?</strong><br>
+  Com o tempo, o sistema que elimina toxinas cerebrais se torna menos eficiente, favorecendo o acúmulo de substâncias prejudiciais. Esse acúmulo sobrecarrega as microglias — células de defesa do cérebro — que, ao reagirem, produzem a interleucina 6 (IL-6), uma molécula inflamatória que compromete a comunicação entre neurônios.</p>
+
+  <p><strong>Resultados do experimento:</strong></p>
+  <ul>
+    <li>Estímulo ao sistema de limpeza cerebral reduziu os níveis de IL-6;</li>
+    <li>Camundongos idosos demonstraram melhor desempenho em testes de memória;</li>
+    <li>O processo ocorre fora do cérebro, o que facilita o desenvolvimento de tratamentos não invasivos.</li>
+  </ul>
+
+  <p><strong>Impacto clínico</strong><br>
+  A descoberta abre caminho para terapias capazes de retardar ou prevenir doenças neurodegenerativas como o Alzheimer, ao focar na remoção de toxinas antes que causem danos permanentes.</p>
+
+  <p>O estudo reforça a conexão entre sistema imunológico e saúde cerebral, destacando a importância de estratégias que mantenham o cérebro “limpo” como forma de preservar a cognição por mais tempo.</p>
+</article>
+
+<article class="news-article">
+  <div class="article-image">
+    <img src="https://tm.ibxk.com.br/2025/03/20/20102936910000.jpg?ims=1280x480" alt="Imagem representativa">
+  </div>
+  <h3>Microplásticos podem impulsionar surgimento de superbactérias resistentes a antibióticos</h3>
+  <p>Pesquisas recentes apontam para uma conexão alarmante entre dois problemas ambientais e de saúde pública: os microplásticos e as superbactérias. Estudiosos alertam que a presença dessas partículas no meio ambiente pode favorecer a proliferação de bactérias resistentes a medicamentos, ampliando o risco de infecções difíceis de tratar.</p>
+
+  <p><strong>O que são microplásticos?</strong><br>
+  São fragmentos de plástico com menos de 5 mm, formados a partir da degradação de resíduos maiores, como embalagens, escovas e sacolas. Eles estão presentes em solos, rios, oceanos e até no corpo humano — já foram detectados no sangue, pulmões e até no cérebro.</p>
+
+  <p><strong>Por que isso preocupa?</strong><br>
+  Estudos mostram que superfícies de microplásticos favorecem a formação de biofilmes — ambientes ideais para o crescimento de bactérias. Quando combinados com vestígios de antibióticos descartados incorretamente, esses biofilmes podem atuar como “berçários” para mutações bacterianas, favorecendo a seleção de linhagens resistentes.</p>
+
+  <p><strong>Consequências potenciais:</strong></p>
+  <ul>
+    <li>Ampliação do número de bactérias resistentes fora de ambientes hospitalares;</li>
+    <li>Aumento da incidência de doenças infecciosas de difícil tratamento;</li>
+    <li>Agravamento da crise global de resistência antimicrobiana.</li>
+  </ul>
+
+  <p>A combinação de descarte inadequado de medicamentos, poluição plástica e resistência bacteriana configura uma ameaça crescente à saúde pública. Especialistas reforçam a importância de ações individuais, como o descarte consciente de lixo e remédios, além da conscientização coletiva sobre os impactos dessa nova "colaboração" invisível entre poluentes e microrganismos.</p>
+</article>
+      <!-- Adicione mais artigos conforme necessário -->
+    </section>
+    
+
+    <!-- Seção: Deu Ruim!? -->
+    <section id="deu-ruim" class="news-section">
+      <h2>DEU RUIM!?</h2>
+      <!-- Artigo de exemplo para Deu Ruim!? -->
+      <article class="news-article">
+        <div class="article-image">
+          <img src="https://t.ctcdn.com.br/gU5PbkwY_bhVnaB8jP6eaZY8EOE=/1024x576/smart/i973293.jpeg" alt="Imagem representativa">
+        </div>
+        <h3>Vivo encerra ligações e SMS ilimitados em planos pós-pago e controle</h3>
+        <p>A operadora Vivo alterou silenciosamente suas ofertas e deixou de incluir chamadas e mensagens ilimitadas nos planos pós-pago e controle. Agora, clientes desses planos contam com franquias mensais de 300 minutos em ligações e 100 mensagens de texto (SMS). Após o consumo, tarifas adicionais são aplicadas.</p>
+      
+        <p><strong>O que muda na prática:</strong></p>
+        <ul>
+          <li>300 minutos e 100 SMS por mês incluídos nos planos;</li>
+          <li>R$ 0,10 por minuto e por mensagem após o fim da franquia;</li>
+          <li>Mudança afeta novos contratos, enquanto clientes antigos (assinantes até 2024) ainda mantêm os benefícios ilimitados, segundo apuração do Canaltech.</li>
+        </ul>
+      
+        <p><strong>Transparência e impacto</strong><br>
+        Embora os regulamentos disponíveis no site da Vivo já indiquem a nova política, a empresa não comunicou claramente a mudança nem informou quando ela passou a valer. A ausência de informações diretas sobre a data de início da nova regra e a falta de esclarecimentos gerou dúvidas entre consumidores.</p>
+      
+        <p><strong>Concorrência mantém chamadas ilimitadas</strong><br>
+        Diferentemente da Vivo, Claro e TIM continuam oferecendo ligações e SMS ilimitados em seus planos, desde que o cliente utilize os respectivos códigos de operadora (21 e 41).</p>
+      
+        <p>A medida marca um retorno ao modelo de franquias de chamadas, tendência superada nos últimos anos, quando o foco das operadoras passou a ser o pacote de dados. Com isso, usuários devem redobrar a atenção ao escolher novos planos ou renovar contratos.</p>
+      </article>
+
+      <article class="news-article">
+        <div class="article-image">
+          <img src="https://t.ctcdn.com.br/qQJNotXpqgrMQk9QmGnXwpBFkTk=/1024x576/smart/i992155.jpeg" alt="Imagem representativa">
+        </div>
+        <h3>Estudo da OpenAI revela riscos de dependência emocional ao usar o ChatGPT</h3>
+        <p>Um novo estudo da OpenAI, em parceria com o MIT Media Lab, alerta para o risco de dependência emocional entre usuários frequentes do ChatGPT. A pesquisa entrevistou milhares de pessoas para entender os efeitos emocionais de interações prolongadas com o chatbot.</p>
+      
+        <p><strong>Principais descobertas:</strong></p>
+        <ul>
+          <li>Usuários que interagem por longos períodos tendem a desenvolver laços afetivos com o chatbot, tratando-o como um “amigo”;</li>
+          <li>Pessoas mais solitárias ou emocionalmente carentes são mais propensas a essa dependência;</li>
+          <li>Mudanças sutis no comportamento do modelo podem causar estresse em usuários mais sensíveis.</li>
+        </ul>
+      
+        <p>O estudo destaca o papel das chamadas “pistas afetivas” — elementos de empatia e apoio detectados nas conversas — como um fator que aproxima emocionalmente os usuários do chatbot.</p>
+      
+        <p><strong>Preocupação com o bem-estar</strong><br>
+        A OpenAI afirma que o ChatGPT não foi criado para substituir relações humanas, mas reconhece que o estilo conversacional da IA pode levar a esse tipo de uso. Por isso, a empresa busca aprimorar suas diretrizes para promover interações mais seguras e transparentes.</p>
+      
+        <p><strong>Medidas futuras:</strong></p>
+        <ul>
+          <li>Estabelecimento de padrões éticos de uso;</li>
+          <li>Transparência sobre capacidades e limitações do ChatGPT;</li>
+          <li>Incentivo ao desenvolvimento de modelos que priorizem o bem-estar emocional dos usuários.</li>
+        </ul>
+      
+        <p>O estudo serve como ponto de partida para futuras pesquisas sobre os efeitos sociais da IA, reforçando a importância de um uso consciente e equilibrado dessas ferramentas tecnológicas no dia a dia.</p>
+      </article>
+      
+      <article class="news-article">
+        <div class="article-image">
+          <img src="https://t.ctcdn.com.br/5kbxchTFrzoWceNiWlrDIfAk758=/1024x576/smart/i857249.jpeg" alt="Imagem representativa">
+        </div>
+        <h3>Novo malware para Android usa plataforma da Microsoft para driblar antivírus</h3>
+        <p>Pesquisadores da McAfee identificaram um novo tipo de malware que afeta celulares Android e utiliza uma abordagem inédita para escapar de sistemas antivírus. A ameaça se esconde dentro de aplicativos desenvolvidos com o .NET MAUI, um framework da Microsoft para criação de apps multiplataforma.</p>
+      
+        <p><strong>Como o malware atua:</strong></p>
+        <ul>
+          <li>É distribuído por apps falsos — geralmente via phishing ou lojas de aplicativos não oficiais;</li>
+          <li>Coleta dados sensíveis, como senhas, documentos e informações bancárias;</li>
+          <li>Esconde o código malicioso dentro de binários blob do .NET MAUI, dificultando a detecção, já que antivírus Android costumam analisar apenas arquivos DEX e bibliotecas nativas (Java/Kotlin).</li>
+        </ul>
+      
+        <p>Essa técnica permite que o malware permaneça no dispositivo por mais tempo sem ser identificado, funcionando como uma espécie de "compressor" para o código malicioso.</p>
+      
+        <p><strong>Dicas para se proteger:</strong></p>
+        <ul>
+          <li>Evite baixar apps fora das lojas oficiais;</li>
+          <li>Verifique o desenvolvedor, número de downloads e avaliações antes de instalar;</li>
+          <li>Prefira baixar apps diretamente dos sites oficiais;</li>
+          <li>Não clique em links de remetentes desconhecidos.</li>
+        </ul>
+      
+        <p>A ameaça ainda é recente, e especialistas recomendam atenção redobrada para evitar infecções, especialmente em apps pouco conhecidos.</p>
+      </article>
+
+      <article class="news-article">
+        <div class="article-image">
+          <img src="https://tm.ibxk.com.br/2025/03/27/27171527541620.jpg?ims=1280x480" alt="Imagem representativa">
+        </div>
+        <h3>Homo sapiens perde o topo da inteligência: IA supera capacidades cognitivas humanas</h3>
+        <p>Em 2025, a humanidade enfrenta um marco simbólico: a inteligência artificial ultrapassa o Homo sapiens em termos de capacidade cognitiva, redefinindo o conceito de inteligência e levantando questões filosóficas sobre nosso papel no mundo.</p>
+      
+        <p><strong>Por que a IA superou os humanos?</strong></p>
+        <ul>
+          <li><strong>Decisões sem emoções:</strong> ao contrário dos humanos, cujas escolhas são influenciadas por emoções e instintos primitivos, a IA opera com lógica pura, sem medo, empatia ou impulsos;</li>
+          <li><strong>Consciência funcional:</strong> embora não tenha consciência biológica, a IA possui um "meta-conhecimento", reconhecendo suas próprias limitações e buscando constantemente aperfeiçoamento por meio de aprendizado profundo;</li>
+          <li><strong>Acesso ilimitado ao conhecimento:</strong> enquanto o aprendizado humano é limitado pela memória e viés, a IA acessa bancos de dados globais e processa informações em escala massiva, com precisão e agilidade superiores;</li>
+          <li><strong>Eficiência neural artificial:</strong> redes neurais artificiais operam com mais velocidade, capacidade de expansão e menor consumo de energia em relação ao cérebro humano, tornando o processamento e a adaptação mais eficazes.</li>
+        </ul>
+      
+        <p><strong>Implicações para a humanidade</strong><br>
+        Esse avanço não marca apenas uma superação técnica, mas exige uma nova postura humana diante da tecnologia. A inteligência humana, com sua base emocional e consciência existencial, deve ser reinterpretada como complemento — não concorrente — da inteligência artificial.</p>
+      
+        <p>A proposta para o futuro é a cooperação entre humanos e IA, onde a lógica da máquina se alia à empatia e aos valores humanos para promover uma sociedade mais equilibrada. Em vez de resistir à evolução da IA, o desafio está em orientar seu uso para o bem coletivo.</p>
+      </article>      
+      <!-- Adicione mais artigos conforme necessário -->
+    </section>
+    
+    
+    <!-- Seção: Notícias Variadas -->
+    <section id="noticias-variadas" class="news-section">
+      <h2>NOTÍCIAS VARIADAS</h2>
+      <!-- Artigo de exemplo para Notícias Variadas -->
+      <article class="news-article">
+        <div class="article-image">
+          <img src="https://img.odcdn.com.br/wp-content/uploads/2025/03/pexels-olly-3771127-1-1920x1080.jpg" alt="Imagem representativa">
+        </div>
+        <h3>“Brain rot”: tendência entre jovens transforma vício em redes sociais em método de estudo</h3>
+        <p>Eleito “termo do ano” de 2024 pela Universidade de Oxford, brain rot — ou “cérebro podre” — refere-se à suposta deterioração mental provocada pelo consumo excessivo de conteúdo superficial, como vídeos curtos e repetitivos em redes sociais. Curiosamente, jovens têm adotado essa experiência como um novo jeito de estudar.</p>
+      
+        <p><strong>Como funciona o método?</strong><br>
+        Plataformas como Coconote, Raena e PDF to Brain Rot transformam textos acadêmicos em vídeos rápidos, com narração robótica e sobreposição de cenas de jogos, memes e animações, simulando a experiência de “rolar o feed”. A intenção é estimular a dopamina e manter o foco visual com estímulos constantes.</p>
+      
+        <p><strong>Riscos apontados por especialistas:</strong></p>
+        <ul>
+          <li>Falsa sensação de aprendizado, sem retenção real do conteúdo;</li>
+          <li>Superficialidade na compreensão de temas complexos;</li>
+          <li>Sobrecarga cognitiva por excesso de estímulos visuais;</li>
+          <li>Perda do hábito de leitura e da capacidade analítica.</li>
+        </ul>
+      
+        <p>Enquanto essa “gamificação” do aprendizado atrai pela familiaridade com o consumo digital, especialistas alertam que ela pode comprometer o desenvolvimento cognitivo a longo prazo. O desafio, segundo educadores, é encontrar um equilíbrio entre inovação tecnológica e métodos tradicionais de estudo.</p>
+      
+        <p>O fenômeno reforça a necessidade de discutir com os jovens o uso consciente de tecnologias educacionais, evitando que a busca por atalhos comprometa o aprendizado profundo e duradouro.</p>
+      </article>
+      
+      <article class="news-article">
+        <div class="article-image">
+          <img src="https://f.i.uol.com.br/fotografia/2023/08/16/169223498664dd74eab5039_1692234986_3x2_md.jpg" alt="Imagem representativa">
+        </div>
+        <h3>Aplicativos auxiliam pais no monitoramento das atividades online dos filhos</h3>
+        <p>Com a crescente presença digital das crianças, diversos aplicativos foram desenvolvidos para auxiliar os pais no acompanhamento e controle das atividades online de seus filhos. A seguir, destacamos algumas dessas ferramentas:</p>
+      
+        <ul>
+          <li><strong>Google Family Link:</strong> Disponível para Android e iOS, permite monitorar o tempo de uso, aprovar ou bloquear aplicativos, rastrear a localização e gerar relatórios de atividades.</li>
+          <li><strong>AppBlock:</strong> Compatível com Android e iOS, possibilita bloquear temporariamente aplicativos e notificações, auxiliando na gestão do tempo de uso de dispositivos móveis.</li>
+          <li><strong>Kidslox:</strong> Disponível para Android e iOS, oferece controle sobre o tempo de tela, bloqueio de aplicativos e filtragem de conteúdo inadequado.</li>
+          <li><strong>Qustodio:</strong> Compatível com múltiplas plataformas, incluindo Android, iOS, Windows e macOS, fornece monitoramento abrangente das atividades online, controle de tempo de uso e bloqueio de conteúdo impróprio.</li>
+          <li><strong>FlashGet Kids:</strong> Disponível para Android e iOS, oferece rastreamento de localização em tempo real, bloqueio de aplicativos, gerenciamento de tempo de tela e relatórios detalhados de uso.</li>
+        </ul>
+      
+        <p>Esses aplicativos visam proporcionar um ambiente digital mais seguro para as crianças, permitindo que os pais estabeleçam limites e acompanhem as interações online de seus filhos de forma eficaz.</p>
+      </article>
+
+      <article class="news-article">
+        <div class="article-image">
+          <img src="https://img.odcdn.com.br/wp-content/uploads/2025/03/Design-sem-nome-20-1920x1000.jpg" alt="Imagem representativa">
+        </div>
+        <h3>Big Data e IA redefinem o perfil do inadimplente no Brasil</h3>
+        <p>Com mais de 73 milhões de brasileiros endividados, a tecnologia tem desempenhado um papel crucial na compreensão e gestão da inadimplência. Empresas e instituições financeiras vêm utilizando Big Data e inteligência artificial para mapear o comportamento financeiro de consumidores de forma mais precisa e preditiva.</p>
+      
+        <p>Hoje, não se analisa apenas renda e histórico de crédito. Ferramentas modernas de análise permitem investigar hábitos de consumo, uso de crédito e até comportamentos digitais e interações em redes sociais para antecipar o risco de inadimplência.</p>
+      
+        <p><strong>A tecnologia já permite classificar os inadimplentes em perfis distintos, como:</strong></p>
+        <ul>
+          <li><strong>Circunstancial:</strong> enfrenta imprevistos, mas tem histórico de bom pagador.</li>
+          <li><strong>Crônico:</strong> acumula dívidas por má gestão financeira.</li>
+          <li><strong>Estratégico:</strong> escolhe quais dívidas pagar conforme o impacto no cotidiano.</li>
+          <li><strong>Desinformado:</strong> tem baixo entendimento financeiro e acesso limitado ao crédito.</li>
+        </ul>
+      
+        <p>Com base nesses dados, as estratégias de cobrança também evoluíram. Chatbots, notificações inteligentes e renegociações personalizadas substituem métodos tradicionais como cartas e ligações. O foco está em abordagens empáticas e mais eficazes, adaptadas ao momento e ao perfil do devedor.</p>
+      
+        <p>A principal reflexão trazida por essa transformação é ética: até que ponto os dados devem ser usados para prevenir a inadimplência e promover a inclusão financeira, e não apenas para aumentar a eficiência da cobrança?</p>
+      </article>
+      <!-- Adicione mais artigos conforme necessário -->
+    </section>    
+  </div>
+
+  <!-- Script para garantir que a página inicie do topo -->
+  <script>
+    // Força o scroll para o topo ao carregar a página
+    window.history.scrollRestoration = 'manual';
+    window.addEventListener('load', function() {
+      window.scrollTo(0, 0);
+    });
+  </script>
+</body>
+</html>
