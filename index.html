@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -72,20 +73,11 @@ header .edition {
   top: 0;
   z-index: 100;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-/* Hamburger icon – oculto em telas maiores */
-.menu .hamburger {
-  display: none;
-}
-
-/* Esconde o checkbox de toggle */
-#menu-toggle {
-  display: none;
-}
-
+/* Itens do menu para dispositivos maiores */
 .menu ul {
   list-style: none;
   margin: 0;
@@ -157,7 +149,7 @@ article.news-article h3 {
   color: #000;
 }
 
-/* Estilo para subtópicos (por exemplo, utilizando a tag <h4>) */
+/* Estilo para subtópicos (exemplo: tag <h4>) */
 article.news-article h4 {
   font-family: 'Courier Prime', monospace;
   font-size: 1.6em;
@@ -205,6 +197,7 @@ li {
   transform: scale(1.05);
 }
 
+/* Estilos específicos para dispositivos móveis */
 @media (max-width: 600px) {
   .container {
     padding: 15px 20px;
@@ -222,21 +215,27 @@ li {
     font-size: 1.4em;
   }
   
-  /* Hamburger menu styles para smartphones */
+  /* Estilo para o menu em dispositivos móveis */
   .menu {
     flex-direction: column;
     align-items: flex-start;
     padding: 10px;
   }
   
-  /* Exibe o ícone do hamburger */
-  .menu .hamburger {
-    display: block;
+  /* Container para o ícone do hamburger e o label "Menu" */
+  .menu .hamburger-container {
+    display: flex;
+    align-items: center;
     cursor: pointer;
+    width: 100%;
+    padding: 0 10px;
+  }
+  
+  .menu .hamburger {
     width: 30px;
     height: 25px;
     position: relative;
-    margin: 0 0 10px 10px;
+    margin-right: 10px;
   }
   
   .menu .hamburger span {
@@ -248,15 +247,22 @@ li {
     transition: 0.4s;
   }
   
+  /* Label "Menu" que permanece visível mesmo quando recolhido */
+  .menu .menu-label {
+    font-size: 1.2em;
+    color: #fff;
+  }
+  
   /* Esconde os itens do menu por padrão */
   .menu ul {
     flex-direction: column;
     width: 100%;
     display: none;
+    margin-top: 10px;
   }
   
-  /* Exibe o menu quando o checkbox estiver marcado */
-  #menu-toggle:checked ~ ul {
+  /* Exibe o menu quando a classe "open" é adicionada */
+  .menu.open ul {
     display: flex;
   }
   
@@ -822,6 +828,25 @@ li {
     window.addEventListener('load', function() {
       window.scrollTo(0, 0);
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+  const menu = document.querySelector(".menu");
+  const toggleButton = document.querySelector(".menu .hamburger-container");
+  const menuLabel = document.querySelector(".menu .menu-label");
+
+  if (toggleButton && menu && menuLabel) {
+    toggleButton.addEventListener("click", function() {
+      menu.classList.toggle("open");
+      // Atualiza o texto do label conforme o estado do menu
+      if (menu.classList.contains("open")) {
+        menuLabel.textContent = "Fechar";
+      } else {
+        menuLabel.textContent = "Menu";
+      }
+    });
+  }
+});
+
   </script>
 </body>
 </html>
