@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -13,6 +12,7 @@
 html {
   scroll-behavior: smooth;
 }
+
 /* Fundo da página: degradê sutil em preto e cinza */
 body {
   margin: 0;
@@ -26,6 +26,7 @@ body {
   font-family: 'Roboto Mono', monospace;
   color: #fff;
 }
+
 /* Container centralizado com sombra aprimorada */
 .container {
   max-width: 900px;
@@ -37,12 +38,14 @@ body {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   color: #000;
 }
+
 header {
   text-align: center;
   padding: 20px 0;
   border-bottom: 2px solid #888;
   margin-bottom: 20px;
 }
+
 header h1 {
   margin: 0;
   font-family: 'Courier Prime', monospace;
@@ -50,12 +53,14 @@ header h1 {
   letter-spacing: 1px;
   color: #000;
 }
+
 header .edition {
   margin-top: 5px;
   font-size: 1.2em;
   color: #555;
   font-style: italic;
 }
+
 /* Menu de navegação aprimorado */
 .menu {
   background: rgba(68, 68, 68, 0.9);
@@ -66,7 +71,21 @@ header .edition {
   position: sticky;
   top: 0;
   z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+/* Hamburger icon – oculto em telas maiores */
+.menu .hamburger {
+  display: none;
+}
+
+/* Esconde o checkbox de toggle */
+#menu-toggle {
+  display: none;
+}
+
 .menu ul {
   list-style: none;
   margin: 0;
@@ -75,9 +94,11 @@ header .edition {
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .menu ul li {
   margin: 5px 15px;
 }
+
 .menu ul li a {
   text-decoration: none;
   color: #fff;
@@ -85,13 +106,16 @@ header .edition {
   font-family: 'Roboto Mono', monospace;
   transition: color 0.3s;
 }
+
 .menu ul li a:hover {
   color: #ff9800;
 }
+
 /* Seção de notícias */
 .news-section {
   margin-top: 40px;
 }
+
 .news-section h2 {
   font-family: 'Courier Prime', monospace;
   font-size: 2.2em;
@@ -101,6 +125,7 @@ header .edition {
   text-align: center;
   color: #333;
 }
+
 /* Artigo com efeito hover e transição suave */
 article.news-article {
   padding: 20px;
@@ -112,13 +137,16 @@ article.news-article {
   color: #000;
   transition: transform 0.3s, box-shadow 0.3s;
 }
+
 article.news-article:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0,0,0,0.2);
 }
+
 article.news-article:last-of-type {
   margin-bottom: 0;
 }
+
 article.news-article h3 {
   font-family: 'Courier Prime', monospace;
   font-size: 1.8em;
@@ -128,6 +156,7 @@ article.news-article h3 {
   text-align: center;
   color: #000;
 }
+
 /* Estilo para subtópicos (por exemplo, utilizando a tag <h4>) */
 article.news-article h4 {
   font-family: 'Courier Prime', monospace;
@@ -137,6 +166,7 @@ article.news-article h4 {
   border-bottom: 1px dashed #aaa;
   padding-bottom: 5px;
 }
+
 /* Ajuste do espaçamento entre parágrafos */
 article.news-article p {
   margin: 20px 0;
@@ -145,20 +175,24 @@ article.news-article p {
   font-size: 1em;
   color: #333;
 }
+
 /* Estilo para listas com espaçamento aprimorado */
 ul {
   margin: 20px 0 20px 20px;
   padding: 0;
 }
+
 li {
   margin: 12px 0;
 }
+
 .article-image {
   margin-bottom: 15px;
   overflow: hidden;
   border-radius: 8px;
   border: 1px solid #ccc;
 }
+
 .article-image img {
   width: 100%;
   height: 350px;
@@ -166,30 +200,72 @@ li {
   display: block;
   transition: transform 0.3s;
 }
+
 .article-image img:hover {
   transform: scale(1.05);
 }
+
 @media (max-width: 600px) {
   .container {
     padding: 15px 20px;
   }
+  
   header h1 {
     font-size: 2.2em;
   }
+  
   .news-section h2 {
     font-size: 1.8em;
   }
+  
   article.news-article h3 {
     font-size: 1.4em;
   }
-  /* Aprimoramento do menu para smartphones */
+  
+  /* Hamburger menu styles para smartphones */
+  .menu {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+  
+  /* Exibe o ícone do hamburger */
+  .menu .hamburger {
+    display: block;
+    cursor: pointer;
+    width: 30px;
+    height: 25px;
+    position: relative;
+    margin: 0 0 10px 10px;
+  }
+  
+  .menu .hamburger span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: #fff;
+    margin: 5px 0;
+    transition: 0.4s;
+  }
+  
+  /* Esconde os itens do menu por padrão */
   .menu ul {
     flex-direction: column;
-    align-items: center;
+    width: 100%;
+    display: none;
   }
+  
+  /* Exibe o menu quando o checkbox estiver marcado */
+  #menu-toggle:checked ~ ul {
+    display: flex;
+  }
+  
   .menu ul li {
     margin: 10px 0;
+    text-align: left;
+    padding-left: 20px;
   }
+  
   .menu ul li a {
     font-size: 1.2em;
   }
